@@ -25,9 +25,6 @@ public class challenge1 {
 		statistics();
 		
 
-		double SD = calculateSD(boxWeightArray);
-
-        System.out.format("Standard Deviation = %.6f", SD);
 	}
 	
 	public static void arrayListInitialisation()
@@ -108,6 +105,10 @@ public class challenge1 {
 		
 		System.out.println("The average weight is: " + average);
 		
+
+		double SD = calculateSD(boxWeightArray);
+
+        System.out.format("Standard Deviation = %.6f", SD);
 		
 		
 	}
