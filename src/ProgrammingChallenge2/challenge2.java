@@ -1,10 +1,14 @@
-package ProgrammingChallenge1;
+package ProgrammingChallenge2;
 
 import java.util.ArrayList;
 
-public class challenge1 {
+import ProgrammingChallenge1.Biscuit;
+import ProgrammingChallenge1.Box;
 
+public class challenge2 {
 
+	//copy of programmingChallenge1
+	
 	static ArrayList<Box> boxArray = new ArrayList<Box>();
 	static ArrayList<Biscuit> biscuitArray = new ArrayList<Biscuit>();
 	static ArrayList<Double> boxWeightArray = new ArrayList<Double>();
@@ -13,8 +17,8 @@ public class challenge1 {
 	static int numOfBiscuits = 10; //k
 	double remainingBiscuitsAverageWeight;
 	
-	
 	public static void main(String[] args) {
+	
 		
 		arrayListInitialisation();
 		
@@ -24,9 +28,8 @@ public class challenge1 {
 		
 		statistics();
 		
-
+		
 	}
-	
 	public static void arrayListInitialisation()
 	{
 		for (int i = 0; i < numOfBoxes; i++)
@@ -76,17 +79,10 @@ public class challenge1 {
 				{
 					smallestBox = boxArray.get(j).getWeightOfBox();
 					smallestBoxIndex = j;
-				//	break;
-					
-				}
-				
-				
-				
-				
-				
+				}	
 			}
-			boxArray.get(smallestBoxIndex).setWeightOfBox(boxArray.get(smallestBoxIndex).getWeightOfBox() + biscuitArray.get(i).getWeightOfBiscuit());
 			
+			boxArray.get(smallestBoxIndex).setWeightOfBox(boxArray.get(smallestBoxIndex).getWeightOfBox() + biscuitArray.get(i).getWeightOfBiscuit());
 		}
 		
 	}
@@ -104,32 +100,13 @@ public class challenge1 {
 		average = total / boxArray.size();
 		
 		System.out.println("The average weight is: " + average);
-		
-
-		double SD = calculateSD(boxWeightArray);
-
-        System.out.format("Standard Deviation = %.6f", SD);
-		
+				
 		
 	}
 
-	public static double calculateSD(ArrayList<Double> numArray)
-    {
-        double sum = 0.0, standardDeviation = 0.0;
-        int length = numArray.size();
-
-        for(double num : numArray) {
-            sum += num;
-        }
-
-        double mean = sum/length;
-
-        for(double num: numArray) {
-            standardDeviation += Math.pow(num - mean, 2);
-        }
-
-        return Math.sqrt(standardDeviation/length);
-    }
 }
+
+
+
 
 
