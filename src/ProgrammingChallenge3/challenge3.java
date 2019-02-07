@@ -8,10 +8,11 @@ public class challenge3 {
 	static ArrayList<Box> boxArray = new ArrayList<Box>();
 	static ArrayList<Biscuit> biscuitArray = new ArrayList<Biscuit>();
 	static ArrayList<Double> boxWeightArray = new ArrayList<Double>();
-	static int numOfBoxes = 5; //n
+	static int numOfBoxes = 14; //n
 	//double biscuitsTotalWeight = 1000;
-	static int numOfBiscuits = 10; //k
+	static int numOfBiscuits = 100; //k
 	static double biscuitTotalWeight;
+	static int biscuitRemoveCount;
 	
 	
 	public static void main(String[] args) {
@@ -38,7 +39,7 @@ public class challenge3 {
 		
 		for (int i = 0; i < numOfBiscuits; i++)
 		{				
-					Biscuit c = new Biscuit(Math.random());
+					Biscuit c = new Biscuit(Math.random()*100);
 					biscuitArray.add(c);					
 		}
 	}
@@ -96,20 +97,33 @@ public class challenge3 {
 			biscuitTotalWeight += biscuit.weightOfBiscuit;
 		}
 		
-		if ( (biscuitTotalWeight / numOfBoxes) > 200 && (biscuitTotalWeight / numOfBoxes) < 500 )
+		if ( (biscuitTotalWeight / numOfBoxes) > 200 && (biscuitTotalWeight / numOfBoxes) < 500 ) // checking if possible
 		{
 			
 			for (Box box : boxArray) {
 				
 				while(box.getWeightOfBox() < 200)
 					{
+					for (int i = 0; i < biscuitArray.size(); i++) {
+						box.setWeightOfBox(box.getWeightOfBox() + biscuitArray.get(i).getWeightOfBiscuit());
+						biscuitRemoveCount++;
+					}  //fills boxes up to atleast 200g
+						
+					}
 					
+					for (int i = biscuitRemoveCount -5; i >= 0; i--) {
+						biscuitArray.remove(i);
+					} //removes the biscuits that have already been added
 					
 					
 					}
+			
+			
+			//sort rest of biscuits using previous algorithm
+			sortBiscuitsEvenly();
 			}
 			
-		}
+		
 		
 		else 
 		{
@@ -157,6 +171,44 @@ public class challenge3 {
 
         return Math.sqrt(standardDeviation/length);
     }
+	
+	public static void sortBiscuitsEvenly()
+	{
+		
+		for (int i = 0; i < boxArray.size(); i++) 
+		{
+			boxArray.get(i).setWeightOfBox(biscuitArray.get(i).getWeightOfBiscuit());
+			System.out.println("Box: " + (i+1) + " weights: " + boxArray.get(i).getWeightOfBox() );
+		}
+		
+		
+		for (int i = boxArray.size() -1; i < biscuitArray.size(); i++) 
+		{
+			
+			double smallestBox = boxArray.get(0).getWeightOfBox();
+			int smallestBoxIndex = 0;
+			
+			for (int j = 0; j < boxArray.size(); j++) 
+			{
+				
+				if(boxArray.get(j).getWeightOfBox() < smallestBox)
+				{
+					smallestBox = boxArray.get(j).getWeightOfBox();
+					smallestBoxIndex = j;
+				//	break;
+					
+				}
+				
+				
+				
+				
+				
+			}
+			boxArray.get(smallestBoxIndex).setWeightOfBox(boxArray.get(smallestBoxIndex).getWeightOfBox() + biscuitArray.get(i).getWeightOfBiscuit());
+			
+		}
+		
+	}
 }
 
 
